@@ -132,12 +132,13 @@ function translate_input(input_str) {
 
 function analyze_tail_numbers(translated_str) {
     const results = [];
-    
+    let analysis = '';
+
     const tail_str = translated_str.length > 6 ? translated_str.slice(-6) : translated_str;
-    
+
     const last_two = tail_str.length >= 2 ? tail_str.slice(-2) : tail_str;
     const has_zero_or_five = last_two.includes('0') || last_two.includes('5');
-    
+
     let skip_zero_combination_found = false;
     let skip_zero_pair = null;
     if (tail_str.length >= 3 && tail_str[tail_str.length - 2] === '0' && /[1-9]/.test(tail_str[tail_str.length - 1])) {
@@ -149,8 +150,8 @@ function analyze_tail_numbers(translated_str) {
 
     if ((has_zero_or_five && tail_str.length >= 3) || skip_zero_combination_found) {
         const last_three = tail_str.slice(-3);
-        let analysis = `尾号分析（后三位 ${last_three}）：\n`;
-        
+        analysis = `尾号分析（后三位 ${last_three}）：\n`;
+
         const positions = ["倒数第三位", "倒数第二位", "最后一位"];
         for (let i = 0; i < last_three.length; i++) {
             const digit = last_three[i];
@@ -170,7 +171,7 @@ function analyze_tail_numbers(translated_str) {
                 }
             }
         }
-        
+
         if (last_three.length >= 3 && last_three[1] === '0') {
             const skip_zero_pair_local = last_three[0] + last_three[2];
             if (data[skip_zero_pair_local]) {
@@ -179,7 +180,7 @@ function analyze_tail_numbers(translated_str) {
                 analysis += `- 跳过中间0的数字组合${skip_zero_pair_local}：${first_line}（因0的存在，此为间接组合）\n`;
             }
         }
-        
+
         if (last_three.length >= 3) {
             const first_last_pair = last_three[0] + last_three[2];
             if (data[first_last_pair] && (skip_zero_pair === null || first_last_pair !== skip_zero_pair)) {
@@ -195,7 +196,7 @@ function analyze_tail_numbers(translated_str) {
         }
 
     } else {
-        let analysis = `尾号分析（后两位 ${last_two}）：\n`;
+        analysis = `尾号分析（后两位 ${last_two}）：\n`;
         if (data[last_two]) {
             const star_info = data[last_two][0];
             let star_name = null;
@@ -206,7 +207,7 @@ function analyze_tail_numbers(translated_str) {
                     break;
                 }
             }
-            
+
             if (star_name) {
                 if (auspicious_stars.includes(star_name)) {
                     analysis += `- 吉星结尾：${star_name}，通常代表好的结果。`;
@@ -248,16 +249,13 @@ function analyze_tail_numbers(translated_str) {
         } else {
             analysis += "- 未找到对应的八星能量信息。\n";
         }
-        results.push({
-            type: 'tail_analysis',
-            content: analysis
-        });
     }
-     results.push({
-            type: 'tail_analysis',
-            content: analysis
-        });
     
+    results.push({
+        type: 'tail_analysis',
+        content: analysis
+    });
+
     return results;
 }
 
