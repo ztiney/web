@@ -124,10 +124,17 @@
                             <div class="details">${result.explanation}</div>
                         </div>
                     `;
-                } else if (result.type === 'zero_effect' || result.type === 'five_effect') {
+                } else if (result.type === 'zero_effect') {
                     cardHtml = `
                         <div class="result-card neutral">
-                            <div class="info-title">特殊数字影响</div>
+                            <div class="info-title">特殊数字影响 (0)</div>
+                            <div class="details">${result.explanation}</div>
+                        </div>
+                    `;
+                } else if (result.type === 'five_effect') {
+                    cardHtml = `
+                        <div class="result-card neutral">
+                            <div class="info-title">特殊数字影响 (5)</div>
                             <div class="details">${result.explanation}</div>
                         </div>
                     `;

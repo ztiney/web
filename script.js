@@ -123,9 +123,10 @@ function translate_input(input_str) {
         if (/[a-zA-Z]/.test(char)) {
             const num = char.toUpperCase().charCodeAt(0) - 'A'.charCodeAt(0) + 1;
             translated_str += num.toString();
-        } else {
+        } else if (/[0-9]/.test(char)) {
             translated_str += char;
         }
+        // Any other character (like '-') is ignored.
     }
     return translated_str;
 }
@@ -311,28 +312,20 @@ function analyze_combination_pattern(translated_str) {
         }
     }
     
+    // Check for '0' and add explanation only once.
     if (analysis_str.includes('0')) {
-        for (let i = 0; i < analysis_str.length; i++) {
-            if (analysis_str[i] === '0') {
-                results.push({
-                    type: 'zero_effect',
-                    position: i,
-                    explanation: '数字"0"代表"隐藏"、"空虚"或"能量被削弱"。它可能使相邻数字的能量被隐藏或削弱。'
-                });
-            }
-        }
+        results.push({
+            type: 'zero_effect',
+            explanation: '数字"0"代表"隐藏"、"空虚"或"能量被削弱"。它可能使相邻数字的能量被隐藏或削弱。'
+        });
     }
     
+    // Check for '5' and add explanation only once.
     if (analysis_str.includes('5')) {
-        for (let i = 0; i < analysis_str.length; i++) {
-            if (analysis_str[i] === '5') {
-                results.push({
-                    type: 'five_effect',
-                    position: i,
-                    explanation: '数字"5"有"凸显"、"加强"的含义，可能加强相邻数字的能量。'
-                });
-            }
-        }
+        results.push({
+            type: 'five_effect',
+            explanation: '数字"5"有"凸显"、"加强"的含义，可能加强相邻数字的能量。'
+        });
     }
     
     return results;
