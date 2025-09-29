@@ -131,19 +131,22 @@ function translate_input(input_str) {
     return translated_str;
 }
 
-function analyze_tail_numbers(translated_str) {
+function analyze_tail_numbers(translated_str, is_short) {
     const results = [];
     let analysis = '';
 
-    const tail_str = translated_str.length > 6 ? translated_str.slice(-6) : translated_str;
+    const tail_str = is_short ? translated_str : (translated_str.length > 6 ? translated_str.slice(-6) : translated_str);
+
+    if (tail_str.length < 2) {
+        return [];
+    }
 
     const last_two = tail_str.length >= 2 ? tail_str.slice(-2) : tail_str;
     const has_zero_or_five = last_two.includes('0') || last_two.includes('5');
 
     let skip_zero_combination_found = false;
-    let skip_zero_pair = null;
     if (tail_str.length >= 3 && tail_str[tail_str.length - 2] === '0' && /[1-9]/.test(tail_str[tail_str.length - 1])) {
-        skip_zero_pair = tail_str[tail_str.length - 3] + tail_str[tail_str.length - 1];
+        const skip_zero_pair = tail_str[tail_str.length - 3] + tail_str[tail_str.length - 1];
         if (data[skip_zero_pair]) {
             skip_zero_combination_found = true;
         }
@@ -157,11 +160,7 @@ function analyze_tail_numbers(translated_str) {
         for (let i = 0; i < last_three.length; i++) {
             const digit = last_three[i];
             const position = positions[i];
-            if (digit === '0') {
-                analysis += `- ${position}数字${digit}：代表'空'，意味着能量被削弱或隐藏。\n`;
-            } else if (digit === '5') {
-                analysis += `- ${position}数字${digit}：有'凸显'、'加强'的含义，可能加强相邻数字的能量。\n`;
-            } else {
+            if (digit !== '0' && digit !== '5') {
                 if (i < last_three.length - 1) {
                     const pair = digit + last_three[i+1];
                     if (data[pair]) {
@@ -179,20 +178,6 @@ function analyze_tail_numbers(translated_str) {
                 const star_info = data[skip_zero_pair_local][0];
                 const first_line = star_info.split('\n')[0];
                 analysis += `- 跳过中间0的数字组合${skip_zero_pair_local}：${first_line}（因0的存在，此为间接组合）\n`;
-            }
-        }
-
-        if (last_three.length >= 3) {
-            const first_last_pair = last_three[0] + last_three[2];
-            if (data[first_last_pair] && (skip_zero_pair === null || first_last_pair !== skip_zero_pair)) {
-                const star_info = data[first_last_pair][0];
-                const first_line = star_info.split('\n')[0];
-                const middle_digit = last_three[1];
-                if (middle_digit === '0') {
-                     analysis += `- 跳过中间0的数字组合${first_last_pair}：${first_line}（因0的存在，此为间接组合）\n`;
-                } else if (middle_digit === '5') {
-                    analysis += `- 跳过中间5的数字组合${first_last_pair}：${first_line}（因5的存在，此组合可能被加强）\n`;
-                }
             }
         }
 
@@ -235,18 +220,6 @@ function analyze_tail_numbers(translated_str) {
                 const first_line = star_info.split('\n')[0];
                 analysis += `- 数字组合${last_two}：${first_line}\n`;
             }
-        } else if (last_two.includes('0')) {
-            analysis += "- 以'0'结尾：代表'空'，意味着最终可能一无所有，无论是财富、事业还是感情都容易成空。\n";
-            if (last_two.length === 2 && /[1-9]/.test(last_two[0])) {
-                const prefix_pair = last_two[0] + '0';
-                if (data[prefix_pair]) {
-                    const star_info = data[prefix_pair][0];
-                    const first_line = star_info.split('\n')[0];
-                    analysis += `- 数字组合${prefix_pair}：${first_line}（但因0的存在，能量可能被削弱）\n`;
-                } else {
-                    analysis += `- 数字'${last_two[0]}'受后面的0影响，其能量可能被削弱或隐藏。\n`;
-                }
-            }
         } else {
             analysis += "- 未找到对应的八星能量信息。\n";
         }
@@ -260,9 +233,9 @@ function analyze_tail_numbers(translated_str) {
     return results;
 }
 
-function analyze_combination_pattern(translated_str) {
+function analyze_combination_pattern(translated_str, is_short) {
     const results = [];
-    const analysis_str = translated_str.length > 6 ? translated_str.slice(-6) : translated_str;
+    const analysis_str = is_short ? translated_str : (translated_str.length > 6 ? translated_str.slice(-6) : translated_str);
     
     const pairs = [];
     for (let i = 0; i < analysis_str.length - 1; i++) {
@@ -336,12 +309,16 @@ function analyzePhoneNumber(phoneNumber) {
         return { error: '请输入手机号码' };
     }
 
+    const is_short = phoneNumber.length < 11;
     const translated_str = translate_input(phoneNumber);
-    const analysis_str = translated_str.length > 6 ? translated_str.slice(-6) : translated_str;
 
+    const combination_results = analyze_combination_pattern(translated_str, is_short);
+    const tail_results = analyze_tail_numbers(translated_str, is_short);
+
+    const analysis_str_for_pairs = is_short ? translated_str : (translated_str.length > 6 ? translated_str.slice(-6) : translated_str);
     const pairs = [];
-    for (let i = 0; i < analysis_str.length - 1; i++) {
-        const comb = analysis_str[i] + analysis_str[i + 1];
+    for (let i = 0; i < analysis_str_for_pairs.length - 1; i++) {
+        const comb = analysis_str_for_pairs[i] + analysis_str_for_pairs[i + 1];
         if (data[comb]) {
             pairs.push({
                 combination: comb,
@@ -349,9 +326,6 @@ function analyzePhoneNumber(phoneNumber) {
             });
         }
     }
-
-    const combination_results = analyze_combination_pattern(translated_str);
-    const tail_results = analyze_tail_numbers(translated_str);
 
     const results = [];
 
@@ -376,5 +350,6 @@ function analyzePhoneNumber(phoneNumber) {
     results.push(...combination_results);
     results.push(...tail_results);
 
-    return { results: results };
+    return { results: results, translated: translated_str };
 }
+

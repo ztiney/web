@@ -36,7 +36,7 @@
         .form-control:focus {
             box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
         }
-        .result-card {
+        .result-card, .translated-card {
             background-color: #fff;
             border: 1px solid #e9ecef;
             border-radius: 8px;
@@ -66,6 +66,12 @@
             color: #555;
             font-size: 0.95rem;
         }
+        .translated-string {
+            font-weight: bold;
+            font-family: monospace;
+            color: #d63384;
+            word-wrap: break-word;
+        }
     </style>
 </head>
 <body>
@@ -76,13 +82,14 @@
                 <form id="analyze-form">
                     <div class="mb-3">
                         <label for="phone_number" class="form-label">输入数字或字母组合</label>
-                        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="例如: 1314, 688, ABC" required>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="例如: 13988888888, AR-89T6" required>
                     </div>
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">分析</button>
                     </div>
                 </form>
-                <div id="results" class="mt-4"></div>
+                <div id="translated-string-container" class="mt-4"></div>
+                <div id="results" class="mt-2"></div>
             </div>
         </div>
     </div>
@@ -93,7 +100,10 @@
             event.preventDefault();
             const phoneNumber = document.getElementById('phone_number').value;
             const resultsDiv = document.getElementById('results');
+            const translatedDiv = document.getElementById('translated-string-container');
+            
             resultsDiv.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+            translatedDiv.innerHTML = '';
 
             // Call the local JavaScript function from script.js
             const data = analyzePhoneNumber(phoneNumber);
@@ -104,6 +114,16 @@
             if (data.error) {
                 resultsDiv.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
                 return;
+            }
+
+            // Render translated string
+            if (data.translated) {
+                translatedDiv.innerHTML = `
+                    <div class="translated-card">
+                        <div class="info-title">转换后序列:</div>
+                        <div class="translated-string">${data.translated}</div>
+                    </div>
+                `;
             }
 
             // Render results
