@@ -347,10 +347,14 @@ function analyzePhoneNumber(phoneNumber) {
         groupedPairs[star_info].combinations.push(pair.combination);
     }
 
-    const results = Object.values(groupedPairs);
+    const pair_results = Object.values(groupedPairs);
 
-    results.push(...combination_results);
-    results.push(...tail_results);
+    // Build the final results array in the correct order
+    const results = [
+        ...pair_results,
+        ...combination_results,
+        ...tail_results
+    ];
 
     return { results: results, translated: translated_str };
 }
