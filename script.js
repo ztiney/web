@@ -327,25 +327,27 @@ function analyzePhoneNumber(phoneNumber) {
         }
     }
 
-    const results = [];
-
+    // Group identical pairs
+    const groupedPairs = {};
     for (const pair of pairs) {
         const content_lines = pair.content.split('\n');
         const star_info = content_lines[0];
         const star_details = content_lines.slice(1).join('\n');
-        
-        const is_auspicious = auspicious_stars.some(star => star_info.includes(star));
-        const is_inauspicious = inauspicious_stars.some(star => star_info.includes(star));
-        
-        results.push({
-            type: 'pair',
-            combination: pair.combination,
-            info: star_info,
-            details: star_details,
-            is_auspicious: is_auspicious,
-            is_inauspicious: is_inauspicious
-        });
+
+        if (!groupedPairs[star_info]) {
+            groupedPairs[star_info] = {
+                type: 'pair',
+                info: star_info,
+                details: star_details,
+                is_auspicious: auspicious_stars.some(star => star_info.includes(star)),
+                is_inauspicious: inauspicious_stars.some(star => star_info.includes(star)),
+                combinations: []
+            };
+        }
+        groupedPairs[star_info].combinations.push(pair.combination);
     }
+
+    const results = Object.values(groupedPairs);
 
     results.push(...combination_results);
     results.push(...tail_results);
