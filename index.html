@@ -193,6 +193,7 @@
                     html2canvas(captureArea, { 
                         useCORS: true, 
                         scale: 2, // Higher scale for better quality
+                        width: captureArea.offsetWidth, // Force width to match element's rendered width
                         backgroundColor: '#f0f2f5' // Match body background
                     }).then(canvas => {
                         const link = document.createElement('a');
