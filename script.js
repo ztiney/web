@@ -24,12 +24,12 @@ const data = {
     // 延年 (事业、能力)
     '19': ['八星:延年(事业、能力),最强,阳刚\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别是肩颈和心脏方面的问题。'],
     '91': ['八星:延年(事业、能力),最强,阳刚\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别是肩颈和心脏方面的问题。'],
-    '87': ['八星:延年(事业、能力),强,阳刚\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别'],
-    '78': ['八星:延年(事业、能力),强,阳刚\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别'],
-    '43': ['八星:延年(事业、能力),较弱，阴柔\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别'],
-    '34': ['八星:延年(事业、能力),较弱，阴柔\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别'],
-    '26': ['八星:延年(事业、能力),最弱，阴柔\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别'],
-    '62': ['八星:延年(事业、能力),最弱，阴柔\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别'],
+    '87': ['八星:延年(事业、能力),强,阳刚\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别是肩颈和心脏方面的问题。'],
+    '78': ['八星:延年(事业、能力),强,阳刚\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别是肩颈和心脏方面的问题。'],
+    '43': ['八星:延年(事业、能力),较弱，阴柔\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别是肩颈和心脏方面的问题。'],
+    '34': ['八星:延年(事业、能力),较弱，阴柔\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别是肩颈和心脏方面的问题。'],
+    '26': ['八星:延年(事业、能力),最弱，阴柔\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别是肩颈和心脏方面的问题。'],
+    '62': ['八星:延年(事业、能力),最弱，阴柔\n优点：具有强大的领导力和责任感，是天生的大将之才。做事专业，意志坚定，有主见，能够独当一面。在理财方面懂得规划和节制，是懂得"守财"的类型。\n缺点：性格强势，好作主导，有时显得固执，听不进他人意见。工作压力大，容易劳心劳力，长期下来可能影响健康，特别是肩颈和心脏方面的问题。'],
     
     // 伏位 (稳定、忍耐)
     '11': ['八星:伏位(稳定、忍耐),最强,阳刚\n优点：有极强的耐心和毅力，做事谨慎，善于等待时机。他们能够卧薪尝胆，厚积薄发，适合从事需要长期坚持和研究的工作。\n缺点：性格偏于保守和被动，内心缺乏安全感，有时会因为过于犹豫而错失良机。事业和感情上容易陷入被动等待的局面，突破性不强，进展缓慢。'],
@@ -144,6 +144,7 @@ function analyze_tail_numbers(translated_str, is_short) {
     const last_two = tail_str.length >= 2 ? tail_str.slice(-2) : tail_str;
     const has_zero_or_five = last_two.includes('0') || last_two.includes('5');
 
+    // 检查是否有跳过0的组合
     let skip_zero_combination_found = false;
     if (tail_str.length >= 3 && tail_str[tail_str.length - 2] === '0' && /[1-9]/.test(tail_str[tail_str.length - 1])) {
         const skip_zero_pair = tail_str[tail_str.length - 3] + tail_str[tail_str.length - 1];
@@ -152,6 +153,7 @@ function analyze_tail_numbers(translated_str, is_short) {
         }
     }
 
+    // 如果包含0或5，或者有跳过0的组合，则分析后三位
     if ((has_zero_or_five && tail_str.length >= 3) || skip_zero_combination_found) {
         const last_three = tail_str.slice(-3);
         analysis = `尾号分析（后三位 ${last_three}）：\n`;
@@ -160,6 +162,7 @@ function analyze_tail_numbers(translated_str, is_short) {
         for (let i = 0; i < last_three.length; i++) {
             const digit = last_three[i];
             const position = positions[i];
+            // 对于0和5，我们只分析它们对相邻数字的影响
             if (digit !== '0' && digit !== '5') {
                 if (i < last_three.length - 1) {
                     const pair = digit + last_three[i+1];
@@ -172,6 +175,7 @@ function analyze_tail_numbers(translated_str, is_short) {
             }
         }
 
+        // 检查跳过中间0的组合
         if (last_three.length >= 3 && last_three[1] === '0') {
             const skip_zero_pair_local = last_three[0] + last_three[2];
             if (data[skip_zero_pair_local]) {
@@ -182,6 +186,7 @@ function analyze_tail_numbers(translated_str, is_short) {
         }
 
     } else {
+        // 否则只分析后两位
         analysis = `尾号分析（后两位 ${last_two}）：\n`;
         if (data[last_two]) {
             const star_info = data[last_two][0];
@@ -273,19 +278,22 @@ function analyze_combination_pattern(translated_str, is_short) {
         }
         
         if (current_star && next_star) {
-            const canonicalKey = [current_star, next_star].sort().join('+');
-            const explanation = special_combinations[canonicalKey] || special_combinations[`${current_star}+${next_star}`] || special_combinations[`${next_star}+${current_star}`];
+            // 保持组合顺序的重要性，避免不必要的排序
+            const directKey = `${current_star}+${next_star}`;
+            const reverseKey = `${next_star}+${current_star}`;
+            const explanation = special_combinations[directKey] || special_combinations[reverseKey];
 
             if (explanation) {
-                if (!groupedSpecialCombos[canonicalKey]) {
-                    groupedSpecialCombos[canonicalKey] = {
+                const keyToUse = special_combinations[directKey] ? directKey : reverseKey;
+                if (!groupedSpecialCombos[keyToUse]) {
+                    groupedSpecialCombos[keyToUse] = {
                         explanation: explanation,
                         combinations: [],
-                        star_pair: canonicalKey
+                        star_pair: keyToUse
                     };
                 }
                 const special_combination_digits = current_pair.combination + next_pair.second_digit;
-                groupedSpecialCombos[canonicalKey].combinations.push(special_combination_digits);
+                groupedSpecialCombos[keyToUse].combinations.push(special_combination_digits);
             }
         }
     }

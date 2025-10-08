@@ -247,14 +247,30 @@
                                     }).catch(function(err) {
                                         console.error('无法复制图片: ', err);
                                         copyButton.textContent = '复制失败';
-                                        alert('无法复制图片，请检查浏览器权限或通过控制台查看错误。');
+                                        // 添加更友好的错误提示
+                                        alert('无法复制图片到剪贴板。您可以使用"保存为图片"功能下载图片。');
                                         setTimeout(() => {
                                             copyButton.textContent = originalText;
                                             copyButton.disabled = false;
                                         }, 3000);
                                     });
+                                } else {
+                                    copyButton.textContent = '复制失败';
+                                    alert('无法生成图片。您可以使用"保存为图片"功能下载图片。');
+                                    setTimeout(() => {
+                                        copyButton.textContent = originalText;
+                                        copyButton.disabled = false;
+                                    }, 3000);
                                 }
                             }, 'image/png');
+                        }).catch(function(err) {
+                            console.error('无法生成图片: ', err);
+                            copyButton.textContent = '生成失败';
+                            alert('无法生成图片。您可以使用"保存为图片"功能下载图片。');
+                            setTimeout(() => {
+                                copyButton.textContent = originalText;
+                                copyButton.disabled = false;
+                            }, 3000);
                         });
                     });
                 }
