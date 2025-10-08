@@ -194,8 +194,11 @@
                 saveButton.addEventListener('click', function() {
                     const captureArea = document.getElementById('capture-area');
                     html2canvas(captureArea, { 
-                        useCORS: true, 
+                        useCORS: true,
                         scale: 2,
+                        width: captureArea.scrollWidth,
+                        height: captureArea.scrollHeight,
+                        windowWidth: captureArea.scrollWidth,
                         windowHeight: captureArea.scrollHeight,
                         backgroundColor: '#f0f2f5'
                     }).then(canvas => {
@@ -225,6 +228,9 @@
                         html2canvas(captureArea, { 
                             useCORS: true, 
                             scale: 2, 
+                            width: captureArea.scrollWidth,
+                            height: captureArea.scrollHeight,
+                            windowWidth: captureArea.scrollWidth,
                             windowHeight: captureArea.scrollHeight,
                             backgroundColor: '#f0f2f5' 
                         }).then(canvas => {
