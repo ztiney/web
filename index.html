@@ -181,20 +181,23 @@
                 resultsDiv.innerHTML += cardHtml;
             });
 
-            // Add share button after rendering results
+            // Add action buttons after rendering results
             if (data.results.length > 0) {
-                const shareButton = document.createElement('button');
-                shareButton.textContent = '保存为图片';
-                shareButton.className = 'btn btn-secondary';
-                shareBtnContainer.appendChild(shareButton);
+                shareBtnContainer.classList.add('d-grid', 'gap-2', 'd-md-flex', 'justify-content-md-end');
 
-                shareButton.addEventListener('click', function() {
+                // 1. Save as Image Button
+                const saveButton = document.createElement('button');
+                saveButton.textContent = '保存为图片';
+                saveButton.className = 'btn btn-secondary';
+                shareBtnContainer.appendChild(saveButton);
+
+                saveButton.addEventListener('click', function() {
                     const captureArea = document.getElementById('capture-area');
                     html2canvas(captureArea, { 
                         useCORS: true, 
-                        scale: 2, // Higher scale for better quality
-                        width: captureArea.offsetWidth, // Force width to match element's rendered width
-                        backgroundColor: '#f0f2f5' // Match body background
+                        scale: 2,
+                        width: captureArea.offsetWidth,
+                        backgroundColor: '#f0f2f5'
                     }).then(canvas => {
                         const link = document.createElement('a');
                         link.download = 'baxing-analysis.png';
@@ -202,6 +205,53 @@
                         link.click();
                     });
                 });
+
+                // 2. Copy to Clipboard Button
+                const copyButton = document.createElement('button');
+                copyButton.textContent = '复制图片';
+                copyButton.className = 'btn btn-info';
+                shareBtnContainer.appendChild(copyButton);
+
+                if (!navigator.clipboard || !navigator.clipboard.write) {
+                    copyButton.disabled = true;
+                    copyButton.title = '此功能需要通过本地服务器 (localhost) 访问才能使用';
+                } else {
+                    copyButton.addEventListener('click', function() {
+                        const originalText = copyButton.textContent;
+                        copyButton.textContent = '复制中...';
+                        copyButton.disabled = true;
+
+                        const captureArea = document.getElementById('capture-area');
+                        html2canvas(captureArea, { 
+                            useCORS: true, 
+                            scale: 2, 
+                            width: captureArea.offsetWidth, 
+                            backgroundColor: '#f0f2f5' 
+                        }).then(canvas => {
+                            canvas.toBlob(function(blob) {
+                                if (blob) {
+                                    navigator.clipboard.write([
+                                        new ClipboardItem({ 'image/png': blob })
+                                    ]).then(function() {
+                                        copyButton.textContent = '已复制!';
+                                        setTimeout(() => {
+                                            copyButton.textContent = originalText;
+                                            copyButton.disabled = false;
+                                        }, 2000);
+                                    }).catch(function(err) {
+                                        console.error('无法复制图片: ', err);
+                                        copyButton.textContent = '复制失败';
+                                        alert('无法复制图片，请检查浏览器权限或通过控制台查看错误。');
+                                        setTimeout(() => {
+                                            copyButton.textContent = originalText;
+                                            copyButton.disabled = false;
+                                        }, 3000);
+                                    });
+                                }
+                            }, 'image/png');
+                        });
+                    });
+                }
             }
         });
     </script>
