@@ -278,22 +278,27 @@ function analyze_combination_pattern(translated_str, is_short) {
         }
         
         if (current_star && next_star) {
-            // 保持组合顺序的重要性，避免不必要的排序
+            // 使用规范化的键来确保相同组合的不同顺序被合并
             const directKey = `${current_star}+${next_star}`;
             const reverseKey = `${next_star}+${current_star}`;
             const explanation = special_combinations[directKey] || special_combinations[reverseKey];
 
             if (explanation) {
+                // 使用规范化的键（按字母顺序排序）来确保相同组合被合并
+                const canonicalKey = [current_star, next_star].sort().join('+');
                 const keyToUse = special_combinations[directKey] ? directKey : reverseKey;
-                if (!groupedSpecialCombos[keyToUse]) {
-                    groupedSpecialCombos[keyToUse] = {
+                if (!groupedSpecialCombos[canonicalKey]) {
+                    groupedSpecialCombos[canonicalKey] = {
                         explanation: explanation,
                         combinations: [],
                         star_pair: keyToUse
                     };
                 }
                 const special_combination_digits = current_pair.combination + next_pair.second_digit;
-                groupedSpecialCombos[keyToUse].combinations.push(special_combination_digits);
+                // 避免重复添加相同的数字组合
+                if (!groupedSpecialCombos[canonicalKey].combinations.includes(special_combination_digits)) {
+                    groupedSpecialCombos[canonicalKey].combinations.push(special_combination_digits);
+                }
             }
         }
     }
