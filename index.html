@@ -197,6 +197,7 @@
                         useCORS: true, 
                         scale: 2,
                         width: captureArea.offsetWidth,
+                        height: captureArea.scrollHeight,
                         backgroundColor: '#f0f2f5'
                     }).then(canvas => {
                         const link = document.createElement('a');
@@ -226,6 +227,7 @@
                             useCORS: true, 
                             scale: 2, 
                             width: captureArea.offsetWidth, 
+                            height: captureArea.scrollHeight,
                             backgroundColor: '#f0f2f5' 
                         }).then(canvas => {
                             canvas.toBlob(function(blob) {
