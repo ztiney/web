@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,23 +84,26 @@
 <body>
     <div class="container">
         <div class="card">
-            <div class="card-body" id="capture-area">
-                <h1 class="card-title text-center mb-4">八星能量分析器</h1>
-                <form id="analyze-form">
-                    <div class="mb-3">
-                        <label for="phone_number" class="form-label">输入数字或字母组合</label>
-                        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="例如: 13988888888, AR-89T6" required>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">分析</button>
-                    </div>
-                </form>
-                <div id="translated-string-container" class="mt-4"></div>
-                <div id="results" class="mt-2"></div>
+            <div id="capture-area">
+                <div class="card-body">
+                    <h1 class="card-title text-center mb-4">八星能量分析器</h1>
+                    <form id="analyze-form">
+                        <div class="mb-3">
+                            <label for="phone_number" class="form-label">输入数字或字母组合</label>
+                            <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="例如: 13988888888, AR-89T6" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">分析</button>
+                        </div>
+                    </form>
+                    <div id="translated-string-container" class="mt-4"></div>
+                    <div id="results" class="mt-2"></div>
+                </div>
             </div>
             <div id="share-button-container" class="card-footer bg-transparent border-0 p-3"></div>
         </div>
     </div>
+
     <script src="script.js"></script>
     <script>
         document.getElementById('analyze-form').addEventListener('submit', function(event) {
