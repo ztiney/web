@@ -291,7 +291,7 @@ function analyze_combination_pattern(translated_str, is_short) {
                     groupedSpecialCombos[canonicalKey] = {
                         explanation: explanation,
                         combinations: [],
-                        star_pair: keyToUse
+                        star_pair: canonicalKey  // 使用canonicalKey作为star_pair以确保一致性
                     };
                 }
                 const special_combination_digits = current_pair.combination + next_pair.second_digit;
