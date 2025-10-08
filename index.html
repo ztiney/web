@@ -196,8 +196,7 @@
                     html2canvas(captureArea, { 
                         useCORS: true, 
                         scale: 2,
-                        width: captureArea.offsetWidth,
-                        height: captureArea.scrollHeight,
+                        windowHeight: captureArea.scrollHeight,
                         backgroundColor: '#f0f2f5'
                     }).then(canvas => {
                         const link = document.createElement('a');
@@ -210,7 +209,7 @@
                 // 2. Copy to Clipboard Button
                 const copyButton = document.createElement('button');
                 copyButton.textContent = '复制图片';
-                copyButton.className = 'btn btn-info';
+                copyButton.className = 'btn btn-success';
                 shareBtnContainer.appendChild(copyButton);
 
                 if (!navigator.clipboard || !navigator.clipboard.write) {
@@ -226,8 +225,7 @@
                         html2canvas(captureArea, { 
                             useCORS: true, 
                             scale: 2, 
-                            width: captureArea.offsetWidth, 
-                            height: captureArea.scrollHeight,
+                            windowHeight: captureArea.scrollHeight,
                             backgroundColor: '#f0f2f5' 
                         }).then(canvas => {
                             canvas.toBlob(function(blob) {
