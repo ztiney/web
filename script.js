@@ -253,6 +253,8 @@ function analyze_combination_pattern(translated_str, is_short) {
         }
     }
     
+    const groupedSpecialCombos = {};
+
     for (let i = 0; i < pairs.length - 1; i++) {
         const current_pair = pairs[i];
         const next_pair = pairs[i+1];
@@ -271,18 +273,31 @@ function analyze_combination_pattern(translated_str, is_short) {
         }
         
         if (current_star && next_star) {
-            const combo_key = `${current_star}+${next_star}`;
-            if (special_combinations[combo_key]) {
+            const canonicalKey = [current_star, next_star].sort().join('+');
+            const explanation = special_combinations[canonicalKey] || special_combinations[`${current_star}+${next_star}`] || special_combinations[`${next_star}+${current_star}`];
+
+            if (explanation) {
+                if (!groupedSpecialCombos[canonicalKey]) {
+                    groupedSpecialCombos[canonicalKey] = {
+                        explanation: explanation,
+                        combinations: [],
+                        star_pair: canonicalKey
+                    };
+                }
                 const special_combination_digits = current_pair.combination + next_pair.second_digit;
-                results.push({
-                    type: 'special_combination',
-                    combination: special_combination_digits,
-                    first_pair: current_pair.combination,
-                    second_pair: next_pair.combination,
-                    explanation: special_combinations[combo_key]
-                });
+                groupedSpecialCombos[canonicalKey].combinations.push(special_combination_digits);
             }
         }
+    }
+
+    for (const key in groupedSpecialCombos) {
+        const group = groupedSpecialCombos[key];
+        results.push({
+            type: 'special_combination',
+            combination: group.combinations.join(', '),
+            star_pair: group.star_pair,
+            explanation: group.explanation
+        });
     }
     
     // Check for '0' and add explanation only once.
